@@ -1,4 +1,6 @@
 {
+  "version": "2.0.7",
+  "main": "src/js/Slider.js",
   "private": true,
   "workspaces": ["src", "example"],
   "scripts": {
