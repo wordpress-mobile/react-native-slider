@@ -1,5 +1,5 @@
 # `@react-native-community/slider`
-[![CircleCI Status](https://img.shields.io/circleci/project/github/react-native-community/react-native-slider/master.svg)](https://circleci.com/gh/react-native-community/workflows/react-native-slider/tree/master) ![Supports Android and iOS](https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg) ![MIT License](https://img.shields.io/npm/l/@react-native-community/slider.svg)
+![npm](https://img.shields.io/npm/v/@react-native-community/slider.svg)[![CircleCI Status](https://img.shields.io/circleci/project/github/react-native-community/react-native-slider/master.svg)](https://circleci.com/gh/react-native-community/workflows/react-native-slider/tree/master) ![Supports Android, iOS, and Web](https://img.shields.io/badge/platforms-android%20|%20ios%20|%20web-lightgrey.svg) ![MIT License](https://img.shields.io/npm/l/@react-native-community/slider.svg)
 
 React Native component used to select a single value from a range of values.
 
@@ -17,7 +17,7 @@ or
 
 and install cocoapods
 
-`pod install`
+`npx pod-install`
 
 ## React Native Compatibility
 To use this library you need to ensure you are using the correct version of React Native.
@@ -27,6 +27,9 @@ To use this library you need to ensure you are using the correct version of Reac
 | `2.x.x`                                  | `>= 0.60`                     |
 | [`1.x.x`](https://github.com/react-native-community/react-native-slider/tree/937f0942f1fffc6ed88b5cf7c88d73b7878f00f0)  | `<= 0.59`                     |
 
+## Web support
+
+For web support please use `@react-native-community/slider@next`
 
 ## Migrating from the core `react-native` module
 This module was created when the Slider was split out from the core of React Native. To migrate to this module you need to follow the installation instructions above and then change you imports from:
@@ -83,6 +86,7 @@ Check out the [example project](example) for more examples.
 - [`minimumTrackImage`](#minimumtrackimage)
 - [`thumbImage`](#thumbimage)
 - [`trackImage`](#trackimage)
+- [`ref`](#ref)
 
 ---
 
@@ -122,7 +126,7 @@ The color used for the track to the left of the button. Overrides the default bl
 
 | Type               | Required |
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](https://reactnative.dev/docs/colors) | No       |
 
 ---
 
@@ -182,7 +186,7 @@ The color used for the track to the right of the button. Overrides the default g
 
 | Type               | Required |
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](https://reactnative.dev/docs/colors) | No       |
 
 ---
 
@@ -223,7 +227,7 @@ Color of the foreground switch grip.
 
 | Type               | Required | Platform |
 | ------------------ | -------- | -------- |
-| [color](colors.md) | No       | Android  |
+| [color](https://reactnative.dev/docs/colors) | No       | Android  |
 
 ---
 
@@ -249,9 +253,9 @@ Assigns a minimum track image. Only static images are supported. The rightmost p
 
 Sets an image for the thumb. Only static images are supported.
 
-| Type                   | Required | Platform |
-| ---------------------- | -------- | -------- |
-| Image.propTypes.source | No       | iOS      |
+| Type                   | Required | 
+| ---------------------- | -------- | 
+| Image.propTypes.source | No       | 
 
 ---
 
@@ -263,7 +267,24 @@ Assigns a single image for the track. Only static images are supported. The cent
 | ---------------------- | -------- | -------- |
 | Image.propTypes.source | No       | iOS      |
 
+---
+
+### `ref`
+
+Reference object.
+
+| Type             | Required | Platform |
+| ---------------- | -------- | -------- |
+| MutableRefObject | No       | web      |
+
 ## Contributing
+
+This project uses [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) to handle its internal dependencies.
+Make sure to use `yarn` to install dependencies
+
+```sh
+yarn install
+```
 
 While developing, you can run the [example app](/example/README.md) to test your changes.
 
@@ -274,6 +295,7 @@ yarn validate:flow
 yarn validate:eslint
 yarn test:jest
 ```
+
 or 
 
 ```sh
