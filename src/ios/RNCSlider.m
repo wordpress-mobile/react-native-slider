@@ -10,23 +10,55 @@
 @implementation RNCSlider
 {
   float _unclippedValue;
+  UITapGestureRecognizer * tapGesturer;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    return [super initWithFrame:frame];
+    self = [super initWithFrame:frame];
+    if (self) {
+        tapGesturer = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(tapHandler:)];
+        [tapGesturer setNumberOfTapsRequired: 1];
+        [self addGestureRecognizer:tapGesturer];
+    }
+    return self;
+}
+
+- (void)tapHandler:(UITapGestureRecognizer *)gesture {
+    CGPoint touchPoint = [gesture locationInView:self];
+    float rangeWidth = self.maximumValue - self.minimumValue;
+    float sliderPercent = touchPoint.x / self.bounds.size.width;
+    [self setValue:self.minimumValue + (rangeWidth * sliderPercent) animated: YES];
 }
 
 - (void)setValue:(float)value
 {
   _unclippedValue = value;
   super.value = value;
+  [self setupAccessibility:value];
 }
 
 - (void)setValue:(float)value animated:(BOOL)animated
 {
   _unclippedValue = value;
   [super setValue:value animated:animated];
+  [self setupAccessibility:value];
+}
+
+- (void)setupAccessibility:(float)value
+{
+  if (self.accessibilityUnits && self.accessibilityIncrements && [self.accessibilityIncrements count] - 1 == (int)self.maximumValue) {
+    int index = (int)value;
+    NSString *sliderValue = (NSString *)[self.accessibilityIncrements objectAtIndex:index];
+    NSUInteger stringLength = [self.accessibilityUnits length];
+
+    NSString *spokenUnits = [NSString stringWithString:self.accessibilityUnits];
+    if (sliderValue && [sliderValue intValue] == 1) {
+      spokenUnits = [spokenUnits substringToIndex:stringLength-1];
+    }
+    
+    self.accessibilityValue = [NSString stringWithFormat:@"%@ %@", sliderValue, spokenUnits];
+  }
 }
 
 - (void)setMinimumValue:(float)minimumValue
@@ -104,7 +136,8 @@
   }
 }
 
-- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
+{
     return YES;
 }
 
