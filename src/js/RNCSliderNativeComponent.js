@@ -48,6 +48,7 @@ type NativeProps = $ReadOnly<{|
   thumbTintColor?: ?ColorValue,
   trackImage?: ?ImageSource,
   value?: ?number,
+  touchToSeek?: ?boolean,
 |}>;
 
 type RNCSliderType = Class<NativeComponent<NativeProps>>;

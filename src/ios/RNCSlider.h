@@ -25,4 +25,6 @@
 @property (nonatomic, strong) NSString *accessibilityUnits;
 @property (nonatomic, strong) NSArray *accessibilityIncrements;
 
+@property (nonatomic, assign) BOOL *touchToSeek;
+
 @end
