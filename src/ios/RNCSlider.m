@@ -24,11 +24,14 @@
     return self;
 }
 
-- (void)tapHandler:(UITapGestureRecognizer *)gesture {
-    CGPoint touchPoint = [gesture locationInView:self];
-    float rangeWidth = self.maximumValue - self.minimumValue;
-    float sliderPercent = touchPoint.x / self.bounds.size.width;
-    [self setValue:self.minimumValue + (rangeWidth * sliderPercent) animated: YES];
+- (void)tapHandler:(UITapGestureRecognizer *)gesture 
+{
+    if (self.touchToSeek) {
+      CGPoint touchPoint = [gesture locationInView:self];
+      float rangeWidth = self.maximumValue - self.minimumValue;
+      float sliderPercent = touchPoint.x / self.bounds.size.width;
+      [self setValue:self.minimumValue + (rangeWidth * sliderPercent) animated: YES];
+    }
 }
 
 - (void)setValue:(float)value
@@ -138,7 +141,10 @@
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
+  if (self.touchToSeek) {
     return YES;
+  }
+  return [super beginTrackingWithTouch:touch withEvent:event];
 }
 
 @end

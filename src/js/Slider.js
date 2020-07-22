@@ -163,6 +163,12 @@ type Props = $ReadOnly<{|
    * The number of elements must be the same as `maximumValue`.
    */
   accessibilityIncrements?: Array<string>,
+
+  /**
+   * Specifies whether touch/tap to seek functionality should be enabled.
+   * Default value for iOS is false, for Android and web is true.
+   */
+  touchToSeek?: ?boolean,
 |}>;
 
 /**
@@ -299,6 +305,7 @@ SliderWithRef.defaultProps = {
   maximumValue: 1,
   step: 0,
   inverted: false,
+  touchToSeek: Platform.OS === 'android',
 };
 
 let styles;
