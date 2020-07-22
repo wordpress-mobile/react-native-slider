@@ -4,8 +4,6 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @format
- * @flow
  */
 
 'use strict';
@@ -33,6 +31,7 @@ class SliderExample extends React.Component<$FlowFixMeProps, $FlowFixMeState> {
         <Slider
           {...this.props}
           onValueChange={value => this.setState({value: value})}
+          onSlidingComplete={value => this.setState({value: value})}
         />
       </View>
     );
@@ -108,10 +107,10 @@ const styles = StyleSheet.create({
   },
 });
 
-exports.title = '<Slider>';
-exports.displayName = 'SliderExample';
-exports.description = 'Slider input for numeric values';
-exports.examples = [
+export const title = '<Slider>';
+export const displayName = 'SliderExample';
+export const description = 'Slider input for numeric values';
+export const examples = [
   {
     title: 'Default settings',
     render(): Element<any> {
